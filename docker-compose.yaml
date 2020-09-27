@@ -1,0 +1,13 @@
+version: "3"
+services:
+  rundeck:
+    build:
+      context: .
+      args:
+        IMAGE: ${RUNDECK_IMAGE:-rundeck/rundeck:3.3.0}
+    container_name: rundeck-ssl
+    command: "-Dserver.https.port=4443 -Drundeck.ssl.config=/home/rundeck/server/config/ssl.properties"
+    ports:
+    - 4443:4443
+    environment:
+      RUNDECK_GRAILS_URL: https://test:4443
